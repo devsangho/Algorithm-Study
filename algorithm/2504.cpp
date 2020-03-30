@@ -19,7 +19,7 @@ public:
 };
 
 int main() {
-    char str[31] = { 0, };
+    char str[32] = { 0, };
     stack<Node> stack;
     int i = 0;
     int sum = 0;
@@ -31,29 +31,42 @@ int main() {
         switch (str[i]) {
             case '(':
             case '[':
-                sum=0;
+                sum = 0;
                 tmp.value = str[i];
                 tmp.isNumber = false;
                 stack.push(tmp);
                 break;
             case ')':
-                tmp = stack.top();
-                if (tmp.isNumber) {
-                    sum = 0;
-                    while (!stack.empty() && stack.top().isNumber) {
-                        sum += stack.top().value;
+                if (!stack.empty()) {
+                    tmp = stack.top();
+                    
+                    if (tmp.isNumber) {
+                        sum = 0;
+                        while (!stack.empty() && stack.top().isNumber) {
+                            sum += stack.top().value;
+                            stack.pop();
+                        }
+                        
+                        if (stack.empty()) {
+                            printf("0");
+                            return 0;
+                        } else {
+                            stack.pop();
+                            tmp.value = sum * 2;
+                            tmp.isNumber = true;
+                            stack.push(tmp);
+                        }
+                        
+                    } else if(!tmp.isNumber && tmp.value == '(') {
+                        sum = 2;
+                        tmp.value = sum;
+                        tmp.isNumber = true;
                         stack.pop();
+                        stack.push(tmp);
+                    } else {
+                        printf("0");
+                        return 0;
                     }
-                    stack.pop();
-                    tmp.value = sum * 2;
-                    tmp.isNumber = true;
-                    stack.push(tmp);
-                } else if(!tmp.isNumber && tmp.value == '(') {
-                    sum = 2;
-                    tmp.value = sum;
-                    tmp.isNumber = true;
-                    stack.pop();
-                    stack.push(tmp);
                 } else {
                     printf("0");
                     return 0;
@@ -61,23 +74,34 @@ int main() {
                 
                 break;
             case ']':
-                tmp = stack.top();
-                if (tmp.isNumber) {
-                    sum = 0;
-                    while (!stack.empty() && stack.top().isNumber) {
-                        sum += stack.top().value;
+                if (stack.size() != 0) {
+                    tmp = stack.top();
+                    
+                    if (tmp.isNumber) {
+                        sum = 0;
+                        while (!stack.empty() && stack.top().isNumber) {
+                            sum += stack.top().value;
+                            stack.pop();
+                        }
+                        if (stack.empty()) {
+                            printf("0");
+                            return 0;
+                        } else {
+                            stack.pop();
+                            tmp.value = sum * 3;
+                            tmp.isNumber = true;
+                            stack.push(tmp);
+                        }
+                    } else if(!tmp.isNumber && tmp.value == '[') {
+                        sum = 3;
+                        tmp.value = sum;
+                        tmp.isNumber = true;
                         stack.pop();
+                        stack.push(tmp);
+                    } else {
+                        printf("0");
+                        return 0;
                     }
-                    stack.pop();
-                    tmp.value = sum * 3;
-                    tmp.isNumber = true;
-                    stack.push(tmp);
-                } else if(!tmp.isNumber && tmp.value == '[') {
-                    sum = 3;
-                    tmp.value = sum;
-                    tmp.isNumber = true;
-                    stack.pop();
-                    stack.push(tmp);
                 } else {
                     printf("0");
                     return 0;
