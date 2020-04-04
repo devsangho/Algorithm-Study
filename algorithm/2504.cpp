@@ -51,10 +51,15 @@ int main() {
                             printf("0");
                             return 0;
                         } else {
-                            stack.pop();
-                            tmp.value = sum * 2;
-                            tmp.isNumber = true;
-                            stack.push(tmp);
+                            if (stack.top().value == '(') {
+                                stack.pop();
+                                tmp.value = sum * 2;
+                                tmp.isNumber = true;
+                                stack.push(tmp);
+                            } else {
+                                printf("0");
+                                return 0;
+                            }
                         }
                         
                     } else if(!tmp.isNumber && tmp.value == '(') {
@@ -87,10 +92,15 @@ int main() {
                             printf("0");
                             return 0;
                         } else {
-                            stack.pop();
-                            tmp.value = sum * 3;
-                            tmp.isNumber = true;
-                            stack.push(tmp);
+                            if (stack.top().value == '[') {
+                                stack.pop();
+                                tmp.value = sum * 3;
+                                tmp.isNumber = true;
+                                stack.push(tmp);
+                            } else {
+                                printf("0");
+                                return 0;
+                            }
                         }
                     } else if(!tmp.isNumber && tmp.value == '[') {
                         sum = 3;
