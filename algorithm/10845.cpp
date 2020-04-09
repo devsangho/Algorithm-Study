@@ -77,12 +77,16 @@ public:
     }
     
     int front() {
-        return array[head];
+        if (isHeadEmpty) {
+            return -1;
+        } else {
+            return array[head];
+        }
     }
     
     int back() {
         if (isHeadEmpty) {
-            return array[tail];
+            return -1;
         } else {
             return array[tail-1];
         }
@@ -97,7 +101,7 @@ int main() {
     
     scanf("%d", &cnt);
     
-    if (cnt >= MAX_ORDER_CNT) {
+    if (cnt > MAX_ORDER_CNT) {
         return 0;
     }
     
