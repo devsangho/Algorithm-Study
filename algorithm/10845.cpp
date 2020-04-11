@@ -44,11 +44,11 @@ public:
     
     void pop() {
         if(isEmpty()) {
-            printf("-1");
+            printf("-1\n");
         } else if (isHeadEmpty == true) {
-            printf("-1");
+            printf("-1\n");
         } else {
-            printf("%d", array[head]);
+            printf("%d\n", array[head]);
             array[head] = 0;
             head = (head + 1) % length;
             
@@ -114,16 +114,16 @@ int main() {
         } else if(strcmp(str, "pop") == 0) {
             q.pop();
         } else if(strcmp(str, "size") == 0) {
-            printf("%d", q.size());
+            printf("%d\n", q.size());
         } else if(strcmp(str, "front") == 0) {
-            printf("%d", q.front());
+            printf("%d\n", q.front());
         } else if(strcmp(str, "back") == 0) {
-            printf("%d", q.back());
+            printf("%d\n", q.back());
         } else if(strcmp(str, "empty") == 0) {
             if (q.isEmpty()) {
-                printf("1");
+                printf("1\n");
             } else {
-                printf("0");
+                printf("0\n");
             }
         } else {
             return 0;
